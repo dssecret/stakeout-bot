@@ -101,8 +101,16 @@ Prefix: {p}
 {p}lsusers: Returns a list of all staked-out users and watched keys
 
 *Faction Stakeouts*
+{p}initfaction: Initializes a faction for a stakeout
+{p}rmfaction: Removes the stakeout on a faction
+{p}editfaction: Adds or removes a stakeout key from/to a faction
+{p}lsfactions: Returns a list of all staked-out factions and watched keys
 
 *Company Stakeouts*
+{p}initcompany: Initializes a company for a stakeout
+{p}rmcompany: Removes the stakeout on a company
+{p}editcompany: Adds or removes a stakeout key from/to a company
+{p}lscompanys: Returns a list of all staked-out companys and watched keys
 
 *NOTE:* Not all commands can be run by everyone. Certain commands require the user to have the administrator permission.
         '''
