@@ -40,7 +40,7 @@ class Users(commands.Cog):
 
             for user in responses:
                 keys = data["users"][str(user["player_id"])]["keys"]
-                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'user-{user["player_id"]}')
+                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'user-{user["name"]}')
 
                 if "level" in keys and data["users"][str(user["player_id"])]["level"] != user["level"]:
                     embed = discord.Embed()
@@ -139,7 +139,7 @@ class Users(commands.Cog):
         dbutils.write("stakeouts", data)
 
         await ctx.guild.create_text_channel(
-            f'user-{request.json()["player_id"]}',
+            f'user-{request.json()["name"]}',
             category=discord.utils.get(ctx.guild.categories, name=dbutils.get("settings", "stakeout"))
         )
 
@@ -163,7 +163,7 @@ class Users(commands.Cog):
             await ctx.send(embed=embed)
             return Exception
 
-        channel = discord.utils.get(ctx.guild.channels, name=f'user-{data["users"][str(id)]["player_id"]}')
+        channel = discord.utils.get(ctx.guild.channels, name=f'user-{data["users"][str(id)]["name"]}')
         await channel.delete()
 
         data["users"].pop(str(id))

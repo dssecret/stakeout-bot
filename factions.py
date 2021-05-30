@@ -40,7 +40,7 @@ class Factions(commands.Cog):
 
             for faction in responses:
                 keys = data["factions"][str(faction["ID"])]["keys"]
-                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["ID"]}')
+                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"]}')
 
                 if "territory" in keys and data["factions"][str(faction["ID"])]["territory"] != faction["territory"]:
                     for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
@@ -235,7 +235,7 @@ class Factions(commands.Cog):
         dbutils.write("stakeouts", data)
 
         await ctx.guild.create_text_channel(
-            f'faction-{request.json()["ID"]}',
+            f'faction-{request.json()["tag"]}',
             category=discord.utils.get(ctx.guild.categories, name=dbutils.get("settings", "stakeout"))
         )
 
@@ -259,7 +259,7 @@ class Factions(commands.Cog):
             await ctx.send(embed=embed)
             return Exception
 
-        channel = discord.utils.get(ctx.guild.channels, name=f'faction-{data["factions"][str(id)]["ID"]}')
+        channel = discord.utils.get(ctx.guild.channels, name=f'faction-{data["factions"][str(id)]["tag"]}')
         await channel.delete()
 
         data["factions"].pop(str(id))
