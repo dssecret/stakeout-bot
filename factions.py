@@ -41,6 +41,7 @@ class Factions(commands.Cog):
             for faction in responses:
                 keys = data["factions"][str(faction["ID"])]["keys"]
                 channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"].lower()}')
+                self.logger.debug(channel)
 
                 if "territory" in keys and data["factions"][str(faction["ID"])]["territory"] != faction["territory"]:
                     if data["factions"][str(faction["ID"])]["territory"] is not None:
