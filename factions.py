@@ -40,7 +40,7 @@ class Factions(commands.Cog):
 
             for faction in responses:
                 keys = data["factions"][str(faction["ID"])]["keys"]
-                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"]}')
+                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"].lower()}')
 
                 if "territory" in keys and data["factions"][str(faction["ID"])]["territory"] != faction["territory"]:
                     for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
@@ -97,8 +97,6 @@ class Factions(commands.Cog):
 
                     for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
                         if "racket" not in territory:
-                            continue
-                        elif territory["racket"] == faction["territory"][territoryid]["racket"]:
                             continue
 
                         if "racket" in territory and "racket" not in faction["territory"][territoryid]:

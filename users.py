@@ -40,7 +40,7 @@ class Users(commands.Cog):
 
             for user in responses:
                 keys = data["users"][str(user["player_id"])]["keys"]
-                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'user-{user["name"]}')
+                channel = discord.utils.get(self.bot.guilds[0].channels, name=f'user-{user["name"].lower()}')
 
                 if "level" in keys and data["users"][str(user["player_id"])]["level"] != user["level"]:
                     embed = discord.Embed()
