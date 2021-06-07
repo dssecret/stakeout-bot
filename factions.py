@@ -43,7 +43,7 @@ class Factions(commands.Cog):
                 channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"].lower()}')
 
                 if "territory" in keys and data["factions"][str(faction["ID"])]["territory"] != faction["territory"]:
-                    if data["factions"][str(faction["ID"])]["territory"] is None:
+                    if data["factions"][str(faction["ID"])]["territory"] is not None:
                         for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
                             if territoryid not in faction["territory"]:
                                 embed = discord.Embed()
