@@ -41,8 +41,6 @@ class Factions(commands.Cog):
             for faction in responses:
                 keys = data["factions"][str(faction["ID"])]["keys"]
                 channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"].lower()}')
-                self.logger.debug(channel)
-
                 if "territory" in keys and data["factions"][str(faction["ID"])]["territory"] != faction["territory"]:
                     if data["factions"][str(faction["ID"])]["territory"] is not None:
                         for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
@@ -143,9 +141,7 @@ class Factions(commands.Cog):
 
                             embed = discord.Embed()
                             embed.title = "Member Status Change"
-                            embed.description = f'Member {member["name"]} of staked out faction {faction["name"]} ' \
-                                                f'has had their status changed from ' \
-                                                f'{member["status"]["description"]} to ' \
+                            embed.description = f'Member {member["name"]} of {faction["name"]} is now ' \
                                                 f'{faction["members"][memberid]["status"]["description"]}' \
                                                 f'{"" if member["status"]["details"] == "" else " because " + utils.remove_html(member["status"]["details"])}.'
                             embed.timestamp = datetime.datetime.utcnow()
