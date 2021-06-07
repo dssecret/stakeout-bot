@@ -43,14 +43,15 @@ class Factions(commands.Cog):
                 channel = discord.utils.get(self.bot.guilds[0].channels, name=f'faction-{faction["tag"].lower()}')
 
                 if "territory" in keys and data["factions"][str(faction["ID"])]["territory"] != faction["territory"]:
-                    for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
-                        if territoryid not in faction["territory"]:
-                            embed = discord.Embed()
-                            embed.title = "Territory Removed"
-                            embed.description = f'The territory {territoryid} of staked out faction ' \
-                                                f'{faction["name"]} has been removed from that faction.'
-                            embed.timestamp = datetime.datetime.utcnow()
-                            await channel.send(embed=embed)
+                    if "territory" in data["factions"][str(faction["ID"])]:
+                        for territoryid, territory in data["factions"][str(faction["ID"])]["territory"].items():
+                            if territoryid not in faction["territory"]:
+                                embed = discord.Embed()
+                                embed.title = "Territory Removed"
+                                embed.description = f'The territory {territoryid} of staked out faction ' \
+                                                    f'{faction["name"]} has been removed from that faction.'
+                                embed.timestamp = datetime.datetime.utcnow()
+                                await channel.send(embed=embed)
 
                     for territoryid, territory in faction["territory"].items():
                         if territoryid not in data["factions"][str(faction["ID"])]["territory"]:
