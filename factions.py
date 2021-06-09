@@ -47,8 +47,8 @@ class Factions(commands.Cog):
                             if territoryid not in faction["territory"]:
                                 embed = discord.Embed()
                                 embed.title = "Territory Removed"
-                                embed.description = f'The territory {territoryid} of staked out faction ' \
-                                                    f'{faction["name"]} has been removed from that faction.'
+                                embed.description = f'The territory {territoryid} of ' \
+                                                    f'{faction["name"]} has been dropped.'
                                 embed.timestamp = datetime.datetime.utcnow()
                                 await channel.send(embed=embed)
 
@@ -56,8 +56,8 @@ class Factions(commands.Cog):
                         if territoryid not in data["factions"][str(faction["ID"])]["territory"]:
                             embed = discord.Embed()
                             embed.title = "Territory Added"
-                            embed.description = f'The territory {territoryid} of staked out faction ' \
-                                                f'{faction["name"]} has been added to that faction.'
+                            embed.description = f'Territory {territoryid} has been claimed by ' \
+                                                f'{faction["name"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
 
@@ -72,7 +72,7 @@ class Factions(commands.Cog):
                                 data["factions"][str(faction["ID"])]["territory"][territoryid]:
                             embed = discord.Embed()
                             embed.title = "Racket Gained"
-                            embed.description = f'A racked at {territoryid} has been gained by faction. ' \
+                            embed.description = f'A racket has spawned on {territoryid}, owned by {faction["name"]}. ' \
                                                 f'The racket is {territory["racket"]["name"]} ' \
                                                 f'and gives {territory["racket"]["reward"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
@@ -82,7 +82,7 @@ class Factions(commands.Cog):
                             embed = discord.Embed()
                             embed.title = "Racket Leveled Up"
                             embed.description = f'The racket at {territoryid} has levelled up. The racket is ' \
-                                                f'{territory["racket"]["name"]} now gives ' \
+                                                f'{territory["racket"]["name"]} and now gives ' \
                                                 f'{territory["racket"]["reward"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
@@ -90,7 +90,7 @@ class Factions(commands.Cog):
                             embed = discord.Embed()
                             embed.title = "Racket Downgraded"
                             embed.description = f'The racket at {territoryid} has downgraded. The racket is ' \
-                                                f'{territory["racket"]["name"]} now gives ' \
+                                                f'{territory["racket"]["name"]} and now gives ' \
                                                 f'{territory["racket"]["reward"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
@@ -102,10 +102,10 @@ class Factions(commands.Cog):
                         if "racket" in territory and "racket" not in faction["territory"][territoryid]:
                             embed = discord.Embed()
                             embed.title = "Racket Lost"
-                            embed.description = f'A racked at {territoryid} has been lost by staked out faction. ' \
+                            embed.description = f'A racket at {territoryid} has been lost by {faction["name"]}. ' \
                                                 f'The racket was ' \
                                                 f'{data["factions"][str(faction["ID"])]["territory"][territoryid]["racket"]["name"]} ' \
-                                                f'and gives ' \
+                                                f'and gave ' \
                                                 f'{data["factions"][str(faction["ID"])]["territory"][territoryid]["racket"]["reward"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
@@ -115,7 +115,7 @@ class Factions(commands.Cog):
                         if memberid not in faction["members"]:
                             embed = discord.Embed()
                             embed.title = "Member Left"
-                            embed.description = f'Member {member["name"]} has left the staked out faction ' \
+                            embed.description = f'Member {member["name"]} has left {faction["name"]} ' \
                                                 f'{faction["name"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
@@ -123,8 +123,8 @@ class Factions(commands.Cog):
                     for memberid, member in faction["members"].items():
                         if memberid not in data["factions"][str(faction["ID"])]["members"]:
                             embed = discord.Embed()
-                            embed.title = "Member Joined"
-                            embed.description = f'Member {member["name"]} has joined the staked out faction ' \
+                            embed.title = "New Member"
+                            embed.description = f'Member {member["name"]} has joined {faction["name"]} ' \
                                                 f'{faction["name"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
@@ -141,7 +141,7 @@ class Factions(commands.Cog):
 
                             embed = discord.Embed()
                             embed.title = "Member Status Change"
-                            embed.description = f'Member {member["name"]} of {faction["name"]} is now ' \
+                            embed.description = f'{member["name"]} of {faction["name"]} is now ' \
                                                 f'{faction["members"][memberid]["status"]["description"]}' \
                                                 f'{"" if member["status"]["details"] == "" else " because " + utils.remove_html(member["status"]["details"])}.'
                             embed.timestamp = datetime.datetime.utcnow()
@@ -161,9 +161,8 @@ class Factions(commands.Cog):
 
                             embed = discord.Embed()
                             embed.title = "Status Change"
-                            embed.description = f'The status of {member["name"]} in staked out faction ' \
-                                                f'{faction["name"]} has changed from ' \
-                                                f'{member["last_action"]["status"]} to ' \
+                            embed.description = f'The status of {member["name"]} in {faction["name"]} ' \
+                                                f'{faction["name"]} is now ' \
                                                 f'{faction["members"][memberid]["last_action"]["status"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
@@ -179,9 +178,8 @@ class Factions(commands.Cog):
 
                             embed = discord.Embed()
                             embed.title = "Status Change"
-                            embed.description = f'The status of {member["name"]} in staked out faction ' \
-                                                f'{faction["name"]} has changed from ' \
-                                                f'{member["last_action"]["status"]} to ' \
+                            embed.description = f'The status of {member["name"]} in {faction["name"]} ' \
+                                                f'{faction["name"]} is now ' \
                                                 f'{faction["members"][memberid]["last_action"]["status"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
