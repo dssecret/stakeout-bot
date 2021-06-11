@@ -115,8 +115,7 @@ class Factions(commands.Cog):
                         if memberid not in faction["members"]:
                             embed = discord.Embed()
                             embed.title = "Member Left"
-                            embed.description = f'Member {member["name"]} has left {faction["name"]} ' \
-                                                f'{faction["name"]}.'
+                            embed.description = f'Member {member["name"]} has left {faction["name"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
 
@@ -124,8 +123,7 @@ class Factions(commands.Cog):
                         if memberid not in data["factions"][str(faction["ID"])]["members"]:
                             embed = discord.Embed()
                             embed.title = "New Member"
-                            embed.description = f'Member {member["name"]} has joined {faction["name"]} ' \
-                                                f'{faction["name"]}.'
+                            embed.description = f'Member {member["name"]} has joined {faction["name"]}.'
                             embed.timestamp = datetime.datetime.utcnow()
                             await channel.send(embed=embed)
 
